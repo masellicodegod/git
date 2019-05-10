@@ -1,0 +1,63 @@
+/* this style will apply to the whole body... */
+@media only screen and (min-width: 290px){
+    .banner {
+        width: 290px;
+        height: 215px;
+        float: left;
+        color: white;
+        background-color: rgb(247, 255, 177);
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 75px;
+        text-align: center;
+    }
+  }
+  
+  @media only screen and (min-width: 1200px){
+.colorscheme {
+    color: #7F797A;
+    color: #FFA6AF;
+    color: #FFF3F4;
+    color: rgb(255, 160, 82);
+    color: #CCC2C3;
+} 
+
+
+.container {
+    margin: 0 auto;
+    width: 1366px;
+    height: 768px;
+    background-color: #FFF3F4;
+
+}
+.banner {
+    width: 1366px;
+    height: 215px;
+    float: left;
+    color: red (128, 104, 0);
+    background-color: #7F797A;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 75px;
+    text-align: center;
+}
+.nav{
+    width: 215px;
+    height: 553px;
+    float: left;
+    background-color: #FFA6AF;
+}
+.content{
+    width: 1121px;
+    height: 523px;
+    background-color: #7F797A;
+    float: left;
+    padding: 15px;
+}
+
+.testDiv{
+    width: 200px;
+    height: 200px;
+    background-color: #CCC2C3;
+    float: right;
+    padding: 15px;
+}
+  }
