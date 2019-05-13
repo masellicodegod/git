@@ -6,7 +6,7 @@ canvas.width = 512;
 canvas.height = 800;
 canvas.style = "position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto; border:2px solid red";
 document.body.appendChild(canvas);
-
+ 
 //######### global variables
 const gravity = 9.8;
 var allSprites = [];
@@ -14,9 +14,9 @@ var allCups = [];
 var cupsCaught = 0;
 var delta;
 var score = 0;
-
+ 
 //######### game objects
-
+ 
 // Background image
 var bgReady = false;
 var bgImage = new Image();
@@ -25,15 +25,15 @@ bgImage.onload = function () {
     console.log("background loaded successfully");
 };
 bgImage.src = "_images/soccer.png";
-
-// ball image
+ 
+// ping pong ball image
 var ballReady = false;
 var ballImage = new Image();
 ballImage.onload = function () {
     ballReady = true;
 };
 ballImage.src = "_images/pingpong_small.png";
-
+ 
 // Cup image
 var cupReady = false;
 var cupImage = new Image();
@@ -41,7 +41,7 @@ cupImage.onload = function () {
     cupReady = true;
 };
 cupImage.src = "_images/cup_small.png";
-
+ 
 function entity(img, w, h, x, y, speed) {
     this.img = img;
     this.w = w;
@@ -63,10 +63,10 @@ function entity(img, w, h, x, y, speed) {
         }
     };
     this.speed = speed;
-
+ 
     allSprites.push(this);
 }
-
+ 
 var Cup = function (img, w, h, x, y, speed, type) {
     entity.call(this, img, w, h, x, y, speed);
     this.type = type;
@@ -83,9 +83,9 @@ var Ball = function (img, w, h, x, y, speed, type) {
         this.velX = 0;
     };
 };
-
+ 
 // Monster.prototype = Object.create(entity.prototype);
-
+ 
 var ball = new Ball(ballImage, 32, 32, canvas.width / 2, canvas.height - 32, 4);
 function cupGen() {
     var cup = new Cup(cupImage, 32, 32, 135, 100, 0, "boss");
@@ -103,30 +103,30 @@ function cupGen() {
 function reset() {
     cupGen();
 }
-
+ 
 
 // var pillar = new entity()
-
+ 
 //######### functions
 //// we don't have any yet
 //######### input ***
-
+ 
 //adding event listeners
-
+ 
 var keysDown = {};
-
+ 
 addEventListener("keydown", function (e) {
     keysDown[e.key] = true;
 }, false);
-
+ 
 addEventListener("keyup", function (e) {
     delete keysDown[e.key];
 }, false);
-
+ 
 //get key input
-
+ 
 var input = function (modifier) {
-    // checks for user input
+    // checks for the user input
     if ("w" in keysDown) { // Player holding up
         ball.velY -= ball.speed;
     }
@@ -134,26 +134,26 @@ var input = function (modifier) {
         ball.velX -= ball.speed;
     }
     // if ("s" in keysDown) { // Player holding down
-    // 	ball.velY += ball.speed;
+    //  ball.velY += ball.speed;
     // }
     if ("d" in keysDown) { // Player holding right
         ball.velX += ball.speed;
     }
 };
-
+ 
 //######### updates ***
 function update() {
     if (cupsCaught >= 10) {
         cupsCaught = 0;
         cupGen();
     }
-
+ 
     for (var sprite in allSprites) {
         allSprites[sprite].x += allSprites[sprite].velX;
         allSprites[sprite].y += allSprites[sprite].velY;
         allSprites[sprite].friction();
     }
-    //check to see if ball hits cup...
+    //this function checks to see if ball hits cup...
     for (cup in allCups) {
         if (
             ball.x <= allCups[cup].x + allCups[cup].w &&
@@ -167,19 +167,19 @@ function update() {
             cupsCaught++;
         }
     }
-    // check to see if ball off screen
+    //this function checks to see if ball off screen
     if (ball.x < 0) {
         ball.x = 0;
     }
-    if (ball.x > canvas.width - 32) {
+   if (ball.x > canvas.width - 32) {
         ball.x = canvas.width - 32;
     }
     if (ball.y < 0) {
         ball.reset();
     }
-
+ 
 }
-
+ 
 //######### render
 function render() {
     //render background first
@@ -197,7 +197,7 @@ function render() {
         ctx.drawImage(ballImage, ball.x, ball.y);
     }
 }
-
+ 
 //######### main function and run once functions
 var main = function () {
     now = Date.now();
@@ -209,7 +209,7 @@ var main = function () {
     // Request to do this again ASAP
     requestAnimationFrame(main);
 };
-
+ 
 {
     // Score
     ctx.fillStyle = "rgb(100, 100, 100)";
@@ -224,11 +224,11 @@ var main = function () {
     ctx.textBaseline = "top";
     ctx.fillText("Delta: " + delta / 1000, 256, 32);
 };
-
+ 
 // Cross-browser support for requestAnimationFrame
 var w = window;
 requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
-
+ 
 // Let's play this game!
 var then = Date.now();
 // ball.reset();
